@@ -1,53 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rm_ui/screen/home_screen/home_screen.dart';
+import 'package:rm_ui/screen/login_screen/signup_login_button.dart';
 import 'package:rm_ui/screen/splash_screen/widgets/logo.dart';
 
 import '../../common_widgets/login_signin_textFields.dart';
+import '../../controller/count_controller.dart';
+import '../forget_password_page/forget_password_page.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController mailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
+  final cc = Get.find<CountController>();
+
+  bool isPressed = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Color(0xff831529),
-              Color(0xff280209),
-            ]),
-          ),
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 83),
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(colors: [
+            Color(0xff831529),
+            Color(0xff280209),
+          ]),
+        ),
+        child: Center(
+          child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
+                SvgPicture.asset(
+                  "assets/images/RM Logo_RM Logo 1.svg",
                   height: 138,
                   width: 138,
-                  child: SvgPicture.asset("assets/images/RM Logo_RM Logo 1.svg"),
                 ),
-                const Text("RESTAURANT MANGEMENT SYSTEM"),
+                Text(
+                  "RESTAURANT MANAGEMENT SYSTEM",
+                  style: GoogleFonts.roboto(
+                    color: const Color(0xffffffff),
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                  ),
+                ),
                 const SizedBox(
                   height: 48,
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 376),
+                  padding: EdgeInsets.zero,
+                  // padding: const EdgeInsets.symmetric(horizontal: 376),
                   child: Container(
-                    width: 400,
+                    width: 382,
                     padding: const EdgeInsets.only(bottom: 5),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32),
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
@@ -55,14 +78,14 @@ class LoginScreen extends StatelessWidget {
                             child: Text(
                               "LOGIN",
                               style: GoogleFonts.roboto(
-                                color: Color(0xff831529),
+                                letterSpacing: 8,
+                                color: const Color(0xff831529),
                                 fontWeight: FontWeight.w700,
                                 fontSize: 30,
                               ),
                             ),
-
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 61,
                           ),
                           MailPasswordField(
@@ -70,40 +93,135 @@ class LoginScreen extends StatelessWidget {
                             text: "Mail",
                             hintText: "example@mail.com",
                             prefixIcon: Icons.mail,
-                            suffixIcon: Icons.done,
+                            suffixIcon:  CircleAvatar(
+                              backgroundColor: Color(0xff831529),
+                              radius: 15,
+                              child: Icon(
+                                Icons.done,
+                                color: Color(0xffF6921E),
+                                size:12,
+                              ),
+                            ),
                             obscureText: false,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
-                          MailPasswordField(
-                            prefixIcon: Icons.lock,
-                            text: "Password",
-                            obscureText: true,
-                            suffixIcon: Icons.remove_red_eye_rounded,
-                            controller: passwordController,
+                          //using GET to obscure the text on clicking on the icon
+                          Obx(() {
+                            return MailPasswordField(
+                              prefixIcon: Icons.lock,
+                              text: "Password",
+                              obscureText: cc.isObscureText.value,
+                              suffixIcon: InkWell(
+                                onTap: cc.onObscureTextPressed,
+                                child: CircleAvatar(
+                                 radius: 20 ,
+                                  backgroundColor: Color(0xff831529),
+                                  child: cc.isObscureText.value
+                                      ? const Icon(Icons.remove_red_eye,
+                                    color: Color(0xffF6921E),
+                                    size:12,
+                                  )
+                                      : const Icon(
+                                          Icons.visibility_off,
+                                      color: Color(0xffF6921E),
+                                    size:12,
+                                        ),
+                                ),
+                              ),
+                              controller: passwordController,
+                            );
+                          }),
+                          //using setstate to obscure the text on clicking on the icon
+                    MailPasswordField(
+                      prefixIcon: Icons.lock,
+                      text: "Password",
+                      obscureText: isPressed,
+                      suffixIcon: InkWell(
+                        onTap: () {
+                          setState(() {
+                            isPressed = !isPressed;
+                          });
+                        },
+                        child: CircleAvatar(
+                          radius: 20 ,
+                          backgroundColor: Color(0xff831529),
+
+                          child: isPressed
+                              ? const Icon(Icons.remove_red_eye,
+                            color: Color(0xffF6921E),
+                            size:12,
+                          )
+                              : const Icon(
+                            Icons.visibility_off,
+                            color: Color(0xffF6921E),
+                            size:12,
                           ),
-                          TextButton(
-                            onPressed: () {},
-                            child: Text("Forget Password?"),
+                        ),
+                      ),
+                      controller: passwordController,
+                    ),
+                          const SizedBox(
+                            height: 10,
                           ),
-                          SizedBox(
+                          InkWell(
+                              onTap: () {
+                                Navigator.push(context, MaterialPageRoute(
+                                  builder: (context) {
+                                    return ForgetPasswordPage();
+                                  },
+                                ));
+                              },
+                              child: Text(
+                                "Forget Password?",
+                                style: GoogleFonts.roboto(
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 14,
+                                  fontStyle: FontStyle.italic,
+                                  color: const Color(0xffF6921E),
+                                ),
+                              )),
+                          const SizedBox(
                             height: 20,
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SignupLogin(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const MyHomePage();
+                                      },
+                                    ),
+                                  );
+                                },
                                 text: "Signup",
-                                color: Color(0xffF6921E),
+                                color: const Color(0xffF6921E),
+                              ),
+                              const SizedBox(
+                                width: 20,
                               ),
                               SignupLogin(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return const MyHomePage();
+                                      },
+                                    ),
+                                  );
+                                },
                                 text: "Login",
-                                color: Color(0xff831529),
+                                color: const Color(0xff831529),
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 32,
                           ),
                         ],
@@ -119,28 +237,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-class SignupLogin extends StatelessWidget {
-  const SignupLogin({
-    super.key,
-    required this.text,
-    required this.color,
-  });
-
-  final String text;
-  final Color color;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-          )),
-      onPressed: () {},
-      child: Text(text),
-    );
-  }
-}
-

@@ -1,14 +1,40 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:intl/intl.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rm_ui/screen/home_screen/widgets/kitchen_preview.dart';
+import 'package:rm_ui/controller/count_controller.dart';
+import 'package:rm_ui/models/ordered_model/ordered_model.dart';
+import 'package:rm_ui/screen/home_screen/widgets/food_tab/food_tab.dart';
+import 'package:rm_ui/screen/home_screen/widgets/food_tab/order_serve_tab.dart';
+import 'package:rm_ui/screen/home_screen/widgets/kitchen_setup/kitchen_setup.dart';
 import 'package:rm_ui/screen/home_screen/widgets/modify_table/modify_table.dart';
+import 'package:rm_ui/screen/home_screen/widgets/ordered_tab/ordered_tab.dart';
+import 'package:rm_ui/screen/home_screen/widgets/show_dialog.dart';
 import 'package:rm_ui/screen/home_screen/widgets/switch_bar.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key, this.typeController}) : super(key: key);
+import '../../common_widgets/custom_app_bar.dart';
+int tabIndex = 0;
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({
+    Key? key,
+    this.typeController,
+  }) : super(key: key);
   final TabController? typeController;
+
+  // String timeString;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+
+  int foodIndex = 0;
+  int counter = 0;
+  final cc = Get.put(CountController());
 
   @override
   Widget build(BuildContext context) {
@@ -16,122 +42,110 @@ class MyHomePage extends StatelessWidget {
       backgroundColor: const Color(0xffFFECEC),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(50.h),
-        child: AppBar(
-          // centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: GestureDetector(
-            onTap: () {},
-            child: SvgPicture.asset("assets/images/MenuIcon.svg"),
-          ),
-          title: Text(
-            "Restaurant Management System",
-            style: GoogleFonts.roboto(
-              fontSize: 22.sp,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xff831529),
-            ),
-          ),
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 10, top: 10),
-              child: Text(
-                "Status Online",
-                style: GoogleFonts.roboto(
-                  color: const Color(0xff652D90),
-                  fontWeight: FontWeight.w700,
-                  fontSize: 18.sp,
-                ),
-              ),
-            ),
-          ],
+        child: CustomAppBar(
+          text: "Restaurant Management System",
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => KitchenSetUp(),
+                ));
+          },
+          colorChange: true,
         ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: 50,
-            width: 714,
-            margin: const EdgeInsets.symmetric(vertical: 18),
-            padding: const EdgeInsets.only(top: 3, left: 2, right: 2, bottom: 1),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              color: const Color(0xffF6921E),
-
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children:  const [
-
-                SwitchBar(text: " TABLE"),
-                SwitchBar(text: "FOOD"),
-                SwitchBar(text: "SERVE/PACK"),
-                SwitchBar(text: "ORDERED"),
-              ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Container(
+              height: 50,
+              width: 714,
+              margin: const EdgeInsets.symmetric(vertical: 18),
+              padding:
+                  const EdgeInsets.only(top: 3, left: 2, right: 2, bottom: 1),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: const Color(0xffF6921E),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SwitchBar(
+                    onTap: () {
+                      setState(() {
+                        tabIndex = 0;
+                      });
+                    },
+                    text: " TABLE",
+                    containerColor:
+                        tabIndex == 0 ? const Color(0xff831529) : Colors.white,
+                    color:
+                        tabIndex == 0 ? Colors.white : const Color(0xff831529),
+                  ),
+                  SwitchBar(
+                    onTap: () {
+                      setState(() {
+                        tabIndex = 1;
+                      });
+                    },
+                    text: "FOOD",
+                    containerColor:
+                        tabIndex == 1 ? const Color(0xff831529) : Colors.white,
+                    color:
+                        tabIndex == 1 ? Colors.white : const Color(0xff831529),
+                  ),
+                  SwitchBar(
+                    onTap: () {
+                      setState(() {
+                        tabIndex = 2;
+                      });
+                    },
+                    text: "SERVE/PACK",
+                    containerColor:
+                        tabIndex == 2 ? const Color(0xff831529) : Colors.white,
+                    color:
+                        tabIndex == 2 ? Colors.white : const Color(0xff831529),
+                  ),
+                  SwitchBar(
+                    onTap: () {
+                      setState(() {
+                        tabIndex = 3;
+                      });
+                    },
+                    text: "ORDERED",
+                    containerColor:
+                        tabIndex == 3 ? const Color(0xff831529) : Colors.white,
+                    color:
+                        tabIndex == 3 ? Colors.white : const Color(0xff831529),
+                  ),
+                ],
+              ),
             ),
           ),
-          const ModifyTable(),
-          Container(
-            height: 318,
-            width: MediaQuery.of(context).size.width,
-
-            color: Colors.white,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 18),
-                  child: Text("Kitchen Preview",
-                    style: GoogleFonts.roboto(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xff831529)
+          if (tabIndex == 0)  ModifyTable(
+            onTap: () {
+              setState(() {
+                tabIndex=1;
 
 
-                    ),
-                  ),
-                ),
-                Row(
-                  children: const [
-                    KitchenPreview(
-                      color: Color(0xffFFEEDB),
-                      image: "assets/images/Order.svg",
-                      status: "Orders",
-                      rate: 909,
-                    ),
-                    KitchenPreview(
-                      color: Color(0xffCFE8FF),
-                      image: "assets/images/Cooking.svg",
-                      status: "Cooking",
-                      rate: 888,
-                    ),
-                    KitchenPreview(
-                      color: Color(0xffFFDFE6),
-                      image: "assets/images/Cooked.svg",
-                      status: "Cooked",
-                      rate: 900,
-                    ),
-                    KitchenPreview(
-                      color: Color(0xffF0D8FF),
-                      image: "assets/images/Served.svg",
-                      status: "Served",
-                      rate: 958,
-                    ),
-                  ],
-                ),
+              });
+            },
 
+          ),
+          if (tabIndex == 1) FoodTab(foodIndex: foodIndex),
+          if (tabIndex == 2)  OrderServeTab(
+            onTap: () {
+              setState(() {
+                tabIndex=3;
 
-
-              ],
-            ),
-
-          )
-
+              });
+            },
+          ),
+          if (tabIndex == 3) OrderedTab(),
         ],
       ),
     );
   }
 }
-
-

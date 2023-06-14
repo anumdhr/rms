@@ -13,7 +13,9 @@ class CancelConfirm extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         ElevatedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
             child: Text(
               "Cancel",
               style: GoogleFonts.roboto(
@@ -34,7 +36,9 @@ class CancelConfirm extends StatelessWidget {
           width: 24,
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           child: Text(
             "Confirm",
             style: GoogleFonts.roboto(
