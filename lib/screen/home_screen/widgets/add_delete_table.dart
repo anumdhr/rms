@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddDeleteTable extends StatelessWidget {
-  AddDeleteTable({
+  const AddDeleteTable({
     super.key,
     required this.addDelete,
     required this.onTap,
     required this.color,
     required this.textColor,
   });
+
   final Color textColor;
 
   final String addDelete;
@@ -19,24 +20,24 @@ class AddDeleteTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 18),
+      padding: const EdgeInsets.symmetric(vertical: 18),
       child: GestureDetector(
         onTap: onTap,
         child: Container(
           width: 207,
           height: 45,
           alignment: Alignment.center,
-
           decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(18)
-
+            color: color,
+            borderRadius: BorderRadius.circular(18),
           ),
-          child: Text(addDelete,
+          child: Text(
+            addDelete,
             style: GoogleFonts.roboto(
-                color:textColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 18.sp),
+              color: textColor,
+              fontWeight: FontWeight.w500,
+              fontSize: 18.sp,
+            ),
           ),
         ),
       ),

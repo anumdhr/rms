@@ -1,16 +1,24 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:rm_ui/controller/count_controller.dart';
-import 'package:rm_ui/screen/about_us/about_us.dart';
 import 'package:rm_ui/screen/home_screen/home_screen.dart';
-import 'package:rm_ui/screen/home_screen/widgets/kitchen_setup/add_food/add_food.dart';
-import 'package:rm_ui/screen/home_screen/widgets/my_profile/my_profile.dart';
-import 'package:rm_ui/screen/login_screen/login_screen.dart';
-import 'package:rm_ui/screen/signin_page/signin_page.dart';
-import 'package:rm_ui/screen/splash_screen/splash_screen.dart';
 
-void main() {
+import 'controller/count_controller.dart';
+
+Future<void> main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
+// final decodedToken = await JwtDecoder.decode(ApiUrl.token);
+// print('asdsd : $decodedToken');
+// final expiredTime = JwtDecoder.getExpirationDate(ApiUrl.token);
+//   print('asdsd : $expiredTime)');
+
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
   runApp(const MyApp());
 }
 
@@ -24,11 +32,11 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(1024, 768),
       builder: (BuildContext context, Widget? child) {
-        return   MaterialApp(
+        return   const MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Restaurant Management System',
 
-          home:SplashScreen() ,
+          home:MyHomePage() ,
         );
       },
     );

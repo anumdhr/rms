@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../models/ordered_model/ordered_model.dart';
 
@@ -106,8 +105,7 @@ class OrderedTab extends StatelessWidget {
                                             ),
                                             //for current date in the field
                                             Text(
-                                              DateFormat.jm().format(
-                                                  DateTime.now()),
+                                              'DateFormat.jm().format(DateTime.now())',
                                               style: GoogleFonts.roboto(
                                                 fontSize: 18,
                                                 fontWeight:

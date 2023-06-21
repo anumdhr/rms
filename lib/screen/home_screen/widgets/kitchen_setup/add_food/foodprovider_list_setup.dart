@@ -5,13 +5,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../../../models/foodprovider_model/foodprovider_model.dart';
 import '../../../../../models/ordered_model/ordered_model.dart';
 
-class FoodProviderListSetUp extends StatelessWidget {
-  const FoodProviderListSetUp({
+class FoodProviderListSetUp extends StatefulWidget {
+  const     FoodProviderListSetUp({
     super.key,
   });
 
+  @override
+  State<FoodProviderListSetUp> createState() => _FoodProviderListSetUpState();
+}
+
+class _FoodProviderListSetUpState extends State<FoodProviderListSetUp> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -160,6 +166,10 @@ class FoodProviderListSetUp extends StatelessWidget {
                                             children: [
                                               InkWell(
                                                 onTap: () {
+                                                  setState(() {
+                                                    foodProviderListModel.removeAt(index);
+                                                  });
+
                                                   Navigator.pop(context);
                                                 },
                                                 child: Container(

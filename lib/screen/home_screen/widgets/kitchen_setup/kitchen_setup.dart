@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:rm_ui/models/ordered_model/ordered_model.dart';
 import '../../../../common_widgets/custom_app_bar.dart';
 import '../../../../controller/count_controller.dart';
@@ -58,7 +59,7 @@ class _KitchenSetUpState extends State<KitchenSetUp> {
                   },
                   child: Container(
                     height: 72,
-                    padding: EdgeInsets.symmetric(vertical: 20),
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     decoration: BoxDecoration(
                       color: Color(0xffFFFFFF),
                       borderRadius: BorderRadius.circular(16),
@@ -74,6 +75,11 @@ class _KitchenSetUpState extends State<KitchenSetUp> {
                           child: Text(
                             kitchenSetUpModel[index].text,
                             overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.roboto(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 18,
+                              color: Color(0xff831529),
+                            ),
                           ),
                         ),
                       ],
@@ -85,7 +91,13 @@ class _KitchenSetUpState extends State<KitchenSetUp> {
             SizedBox(
               height: 20,
             ),
-            Text("Copyright © Emerge Infosys | All Rights Reserved 2023. "),
+            Text("Copyright © Emerge Infosys | All Rights Reserved 2023. ",
+              style: GoogleFonts.roboto(
+                fontWeight: FontWeight.w500,
+                fontSize: 18,
+                color: Color(0xffFFFFFF),
+              ),
+            ),
           ],
         ),
       ),

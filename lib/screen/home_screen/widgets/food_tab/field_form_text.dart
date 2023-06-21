@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FieldFormText extends StatelessWidget {
@@ -93,14 +94,14 @@ class ProfileTextField extends StatelessWidget {
   const ProfileTextField({
     required this.text,
     required this.hintText,
-    required this.icon,
+    required this.image,
     super.key,
   });
 
   final String text;
   final String hintText;
 
-  final IconData icon;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +110,8 @@ class ProfileTextField extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(icon),
+            SvgPicture.asset(image),
+            SizedBox(width: 10,),
             Text(
               /*
               this can be done when we have made the text nullable,,,since

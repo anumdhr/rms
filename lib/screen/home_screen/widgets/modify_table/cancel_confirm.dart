@@ -4,8 +4,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CancelConfirm extends StatelessWidget {
   const CancelConfirm({
-    super.key,
+    super.key, this.onPressed,
   });
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -19,26 +20,24 @@ class CancelConfirm extends StatelessWidget {
             child: Text(
               "Cancel",
               style: GoogleFonts.roboto(
-                color: Color(0xff831529),
+                color: const Color(0xff831529),
                 fontWeight: FontWeight.w400,
                 fontSize: 18.sp,
               ),
             ),
             style: ElevatedButton.styleFrom(
               backgroundColor:
-              Color(0xffF5F5F5),
+              const Color(0xffF5F5F5),
               shape: RoundedRectangleBorder(
                 borderRadius:
                 BorderRadius.circular(20),
               ),
             )),
-        SizedBox(
+        const SizedBox(
           width: 24,
         ),
         ElevatedButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          onPressed:onPressed ,
           child: Text(
             "Confirm",
             style: GoogleFonts.roboto(
@@ -48,7 +47,7 @@ class CancelConfirm extends StatelessWidget {
             ),
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xffFF7C7C),
+            backgroundColor: const Color(0xffFF7C7C),
             shape: RoundedRectangleBorder(
               borderRadius:
               BorderRadius.circular(20),

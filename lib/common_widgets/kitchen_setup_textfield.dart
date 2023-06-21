@@ -6,7 +6,7 @@ class SetUpTextField extends StatelessWidget {
     super.key,
     required this.text,
     required this.hintText,
-     this.controller,
+    this.controller,
     this.suffixIcon,
     this.onChanged,
   });
@@ -34,7 +34,6 @@ class SetUpTextField extends StatelessWidget {
           ),
           TextFormField(
             onChanged: onChanged,
-
             controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
@@ -102,25 +101,51 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
               PopupMenuItem(
                 onTap: () {},
                 value: 0,
-                child: Text("Beeb Kitchen"),
+                child: Text(
+                  "Beeb Kitchen",
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
+                    color: Color(0xffFFFFFF),
+                  ),
+                ),
               ),
               PopupMenuItem(
                 child: Text(
                   "Yogi Kitchen",
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
+                    color: Color(0xffFFFFFF),
+                  ),
                 ),
               ),
               PopupMenuItem(
-                child: Text("Alish Kitchen"),
+                child: Text(
+                  "Alish Kitchen",
+                  style: GoogleFonts.roboto(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
+                    color: Color(0xffFFFFFF),
+                  ),
+                ),
               ),
             ]);
   }
 }
 
 class FoodProvTextField extends StatelessWidget {
-  const FoodProvTextField({Key? key, required this.hintText, required this.text, required this.controller}) : super(key: key);
+  const FoodProvTextField({
+    Key? key,
+    required this.hintText,
+    required this.text,
+    required this.controller,
+    this.maxlength,
+  }) : super(key: key);
   final TextEditingController controller;
   final String hintText;
   final String text;
+  final int? maxlength;
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +157,7 @@ class FoodProvTextField extends StatelessWidget {
           height: 5,
         ),
         TextFormField(
+          maxLength: maxlength,
           controller: controller,
           decoration: InputDecoration(
             hintText: hintText,

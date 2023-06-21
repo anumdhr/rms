@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rm_ui/screen/home_screen/widgets/my_profile/my_profile.dart';
 import 'package:rm_ui/screen/login_screen/login_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -59,7 +60,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           itemBuilder: (context) => [
             PopupMenuItem(
                 child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return MyProfile();
+                    },
+                  ),
+                );
+              },
               child: Row(
                 children: [
                   Icon(

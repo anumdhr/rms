@@ -16,12 +16,9 @@ class AddFoodMenu extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            padding:
-            EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             margin: const EdgeInsets.symmetric(horizontal: 20),
-            decoration: BoxDecoration(
-                color: const Color(0xffFFFFFF),
-                borderRadius: BorderRadius.circular(20)),
+            decoration: BoxDecoration(color: const Color(0xffFFFFFF), borderRadius: BorderRadius.circular(20)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -43,8 +40,7 @@ class AddFoodMenu extends StatelessWidget {
                       ),
                       Expanded(
                         child: ListView.separated(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 15),
+                            padding: EdgeInsets.symmetric(horizontal: 15),
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
                               return Stack(
@@ -57,10 +53,16 @@ class AddFoodMenu extends StatelessWidget {
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
                                       color: Color(0xffFFDFE6),
-                                      borderRadius:
-                                      BorderRadius.circular(12),
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
-                                    child: Text('Momo'),
+                                    child: Text(
+                                      'Momo',
+                                      style: GoogleFonts.roboto(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 18,
+                                        color: Color(0xff831529),
+                                      ),
+                                    ),
                                   ),
                                   Positioned(
                                     left: 10,
@@ -68,8 +70,7 @@ class AddFoodMenu extends StatelessWidget {
                                     child: CircleAvatar(
                                       backgroundColor: Colors.white,
                                       radius: 25,
-                                      child: SvgPicture.asset(
-                                          "assets/images/Order.svg"),
+                                      child: SvgPicture.asset("assets/images/Order.svg"),
                                     ),
                                   ),
                                 ],
@@ -109,22 +110,17 @@ class AddFoodMenu extends StatelessWidget {
                           height: 10,
                         ),
                         Column(
-                          mainAxisAlignment:
-                          MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Expanded(
                                   child: Column(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       CircleAvatar(
-                                          backgroundColor:
-                                          const Color(
-                                              0xff831529),
+                                          backgroundColor: const Color(0xff831529),
                                           radius: 90,
                                           child: Center(
                                             child: SvgPicture.asset(
@@ -137,24 +133,20 @@ class AddFoodMenu extends StatelessWidget {
                                         height: 10,
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceAround,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
                                           CircleAvatar(
-                                            radius: 15,
-                                            backgroundColor:
-                                            Colors.red,
+                                            radius: 25,
+                                            backgroundColor: Color(0xffFCD9B0),
                                             child: SvgPicture.asset(
-                                              "assets/images/AboutIcon.svg",
+                                              "assets/images/cameraone.svg",
                                             ),
                                           ),
                                           CircleAvatar(
-                                            radius: 15,
-                                            backgroundColor:
-                                            Colors.red,
+                                            radius: 25,
+                                            backgroundColor: Color(0xffFCD9B0),
                                             child: SvgPicture.asset(
-                                              "assets/images/AboutIcon.svg",
+                                              "assets/images/GalleryIcon.svg",
                                             ),
                                           ),
                                         ],
@@ -173,7 +165,6 @@ class AddFoodMenu extends StatelessWidget {
                                         hintText: "Type Here...",
                                         showPopupMenu: false,
                                       ),
-
                                       FieldFormText(
                                         text: "Priority",
                                         hintText: "Type Here...",
@@ -186,8 +177,7 @@ class AddFoodMenu extends StatelessWidget {
                                       ),
                                       FieldFormText(
                                         text: "Description",
-                                        hintText:
-                                        "Less Than 36 Letters",
+                                        hintText: "Less Than 36 Letters",
                                         showPopupMenu: false,
                                       ),
                                     ],

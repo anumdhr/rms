@@ -6,11 +6,18 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rm_ui/models/ordered_model/ordered_model.dart';
 
-class FlavorListSetup extends StatelessWidget {
+import '../../../../../models/flavor_list_model/flavor_list_model.dart';
+
+class FlavorListSetup extends StatefulWidget {
   const FlavorListSetup({
     super.key,
   });
 
+  @override
+  State<FlavorListSetup> createState() => _FlavorListSetupState();
+}
+
+class _FlavorListSetupState extends State<FlavorListSetup> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -113,6 +120,10 @@ class FlavorListSetup extends StatelessWidget {
                                             children: [
                                               InkWell(
                                                 onTap: () {
+                                                  setState(() {
+                                                    flavorListModel.removeAt(index);
+                                                  });
+
                                                   Navigator.pop(context);
                                                 },
                                                 child: Container(

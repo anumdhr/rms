@@ -15,9 +15,9 @@ class MyProfile extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xffFFFFFF),
         elevation: 0,
-        leading: const Padding(
+        leading:  Padding(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: Icon(Icons.person),
+          child:SvgPicture.asset("assets/images/ProfileIcon.svg"),
         ),
         title: Text(
           "My Profile",
@@ -37,7 +37,9 @@ class MyProfile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   child: const CircleAvatar(
                     backgroundColor: Color(0xff831529),
                     radius: 15,
@@ -64,7 +66,7 @@ class MyProfile extends StatelessWidget {
                     color: Color(0xff831529),
                     borderRadius: BorderRadius.circular(15),
                   ),
-                  child: Icon(Icons.sticky_note_2),
+                  child: SvgPicture.asset("assets/images/Edit and save.svg"),
                 )
               ],
             ),
@@ -95,15 +97,25 @@ class MyProfile extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CircleAvatar(
-                            radius: 15,
-                            child: SvgPicture.asset(
-                              "assets/images/AboutIcon.svg",
+                            backgroundColor: Color(0xffFCD9B0),
+                            radius: 25,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                "assets/images/cameraone.svg",
+
+                                fit: BoxFit.none,
+
+
+                              ),
                             ),
                           ),
                           CircleAvatar(
-                            radius: 15,
-                            child: SvgPicture.asset(
-                              "assets/images/AboutIcon.svg",
+                            backgroundColor: Color(0xffFCD9B0),
+                            radius: 25,
+                            child: Center(
+                              child: SvgPicture.asset(
+                                "assets/images/GalleryIcon.svg",
+                              ),
                             ),
                           ),
                         ],
@@ -128,8 +140,9 @@ class MyProfile extends StatelessWidget {
                         children: const [
                           Expanded(child: ProfileTextField(
                             hintText: "Jhigu Momo New Restaurant",
+
                             text: "Company Name",
-                            icon: Icons.snapchat,
+                            image: "assets/images/iconProfile.svg",
 
 
                           )),
@@ -137,7 +150,7 @@ class MyProfile extends StatelessWidget {
                             width: 10,
                           ),
                           Expanded(child: ProfileTextField(
-                            icon: Icons.mail,
+                            image: "assets/images/MailIcon.svg",
                             text: "Mail",
                             hintText: "example@mail.com",
                           )),
@@ -147,7 +160,7 @@ class MyProfile extends StatelessWidget {
                       Row(
                         children: const [
                           Expanded(child: ProfileTextField(
-                            icon: Icons.location_on,
+                           image: "assets/images/ContactIcon.svg",
                             text: "Mobile Number",
                             hintText: "+977 9841******",
                           )),
@@ -155,7 +168,7 @@ class MyProfile extends StatelessWidget {
                             width: 5,
                           ),
                           Expanded(child: ProfileTextField(
-                            icon: Icons.location_on,
+                            image: "assets/images/LocationIcon.svg",
                             text: "Address",
                             hintText: "Banepa, Kavre",
                           )),
@@ -167,7 +180,7 @@ class MyProfile extends StatelessWidget {
                       Row(
                         children: [
                           const Expanded(child: ProfileTextField(
-                            icon: Icons.camera_rounded,
+                            image: "assets/images/GlobeIcon.svg",
                             text: "Website",
                             hintText: "www.companyname.com.np",
                           )),
