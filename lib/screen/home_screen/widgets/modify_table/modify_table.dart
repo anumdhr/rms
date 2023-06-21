@@ -209,6 +209,8 @@ class _ModifyTableState extends State<ModifyTable> {
                                                                 color: const Color(0xff831529).withOpacity(0.7), fontWeight: FontWeight.w400, fontSize: 18.sp),
                                                           )
                                                         ],
+
+
                                                       ),
                                                     )
                                                   ],
